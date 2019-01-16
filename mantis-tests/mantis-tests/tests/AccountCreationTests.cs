@@ -49,6 +49,13 @@ namespace mantis_tests
             app.James.Add(account);
 
             app.Registration.Register(account);
+
+            //verification
+            List<AccountData> accountsAfter = app.Admin.GetAllAccounts();
+
+            AccountData registeredAccount = accounts.Find(x => x.Name == account.Name);
+           
+            Assert.IsTrue(registeredAccount!=null);
         }
 
         [TestFixtureTearDown]

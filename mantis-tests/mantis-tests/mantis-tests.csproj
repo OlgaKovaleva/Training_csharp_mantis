@@ -97,6 +97,8 @@
     <Compile Include="tests\AccountCreationTests.cs" />
     <Compile Include="model\AccountData.cs" />
     <Compile Include="tests\Class1.cs" />
+    <Compile Include="tests\ProjectCreationTests.cs" />
+    <Compile Include="tests\ProjectRemovalTests.cs" />
     <Compile Include="tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
