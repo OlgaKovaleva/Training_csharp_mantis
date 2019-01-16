@@ -19,7 +19,7 @@ namespace mantis_tests
 
         public void Register(AccountData account)
         {
-            OpenMainPage();
+            manager.Navigate.OpenLoginPage();
             OpenRegistrationForm();
             FillRegistrationForm(account);
             SubmitRegistrationForm();
@@ -65,9 +65,6 @@ namespace mantis_tests
             driver.FindElement(By.Name("email")).SendKeys(account.Email);
         }
 
-        public void OpenMainPage()
-        {
-            manager.Driver.Url = "http://localhost:8080/mantisbt-2.19.0/login_page.php";
-        }
+       
     }
 }

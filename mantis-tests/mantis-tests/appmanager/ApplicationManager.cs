@@ -16,14 +16,26 @@ namespace mantis_tests
         protected IWebDriver driver;
         protected string baseURL;
 
-        public RegistrationHelper Registration { get; set; }
-        public FtpHelper Ftp { get; set; }
-        public JamesHelper James { get; set; }
-        public MailHelper Mail { get; set; }
-        public AdminHelper Admin { get; set; }
+        protected RegistrationHelper registrationHelper;
+        protected FtpHelper ftpHelper;
+        protected JamesHelper jamesHelper;
+        protected MailHelper mailHelper;
+        protected AdminHelper adminHelper;
+        protected LoginHelper loginHelper;
+        protected ProjectHelper projectHelper;
+        protected NavigationHelper navigationHelper;
+
+        public RegistrationHelper Registration { get { return registrationHelper; } set { registrationHelper = value; } }
+        public FtpHelper Ftp { get { return ftpHelper; } set { ftpHelper = value; } }
+        public JamesHelper James { get { return jamesHelper; } set { jamesHelper = value; } }
+        public MailHelper Mail { get { return mailHelper; } set { mailHelper = value; } }
+        public AdminHelper Admin { get { return adminHelper; } set { adminHelper = value; } }
+        public LoginHelper Login { get { return loginHelper; } set { loginHelper = value; } }
+        public ProjectHelper Project { get { return projectHelper; } set { projectHelper = value; } }
+        public NavigationHelper Navigate { get { return navigationHelper; } set { navigationHelper = value; } }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>(); //специальный объект, который будет утсанавливать соответствие между текущим потоком и типом ApplicationManager
-
+        
 
         private ApplicationManager()//конструктор
         {
@@ -36,6 +48,8 @@ namespace mantis_tests
             James = new JamesHelper(this);
             Mail = new MailHelper(this);
             Admin = new AdminHelper(this, baseURL);
+            Login = new LoginHelper(this);
+            Project = new ProjectHelper(this);
 
         }
 

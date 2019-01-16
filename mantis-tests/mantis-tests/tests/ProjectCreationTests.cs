@@ -16,7 +16,24 @@ namespace mantis_tests
         [Test]
         public void TestProjectCreation()
         {
+            ProjectData project = new ProjectData()
+            {
+                Title = "Project title",
+                Description = "Lorem ipsum dolor sit amet orci aliquam."
+            };
 
+            List<ProjectData> oldList = app.Project.GetAllProjects();
+            app.Project.Create(project);
+
+            List<ProjectData> newList = app.Project.GetAllProjects();
+            oldList.Add(project);
+
+            oldList.Sort();
+            newList.Sort();
+
+            Assert.AreEqual(oldList, newList);
+            Assert.AreEqual(oldList.Count, newList.Count);
+           
         }
     }
 }

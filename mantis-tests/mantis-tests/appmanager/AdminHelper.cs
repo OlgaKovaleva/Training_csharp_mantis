@@ -25,7 +25,7 @@ namespace mantis_tests
         public List<AccountData> GetAllAccounts()
         {
             List<AccountData> accounts = new List<AccountData>();
-            IWebDriver driver = OpenAppAndlogin();
+            IWebDriver driver = LoginAsAdmin();
             driver.Url = baseURL + "/manage_user_page.php";
             IList<IWebElement> rows=driver.FindElements(By.XPath("//table/tbody/tr"));
             foreach (IWebElement row in rows)
@@ -48,13 +48,13 @@ namespace mantis_tests
 
         public void DeleteAccount(AccountData account)
         {
-            IWebDriver driver=OpenAppAndlogin();
+            IWebDriver driver=LoginAsAdmin();
             driver.Url = baseURL + "/manage_user_edit_page.php?user_id="+account.Id;
             driver.FindElement(By.XPath("//form[@id='manage-user-delete-form']/fieldset/span/input")).Click();
             driver.FindElement(By.XPath("//input[4]")).Click();
         }
 
-        public IWebDriver OpenAppAndlogin()
+        public IWebDriver LoginAsAdmin()
         {
             IWebDriver driver = new SimpleBrowserDriver();
             driver.Url = baseURL + "/login_page.php";
