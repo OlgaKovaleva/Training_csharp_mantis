@@ -20,6 +20,7 @@ namespace mantis_tests
         public FtpHelper Ftp { get; set; }
         public JamesHelper James { get; set; }
         public MailHelper Mail { get; set; }
+        public AdminHelper Admin { get; set; }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>(); //специальный объект, который будет утсанавливать соответствие между текущим потоком и типом ApplicationManager
 
@@ -29,13 +30,13 @@ namespace mantis_tests
             
             driver = new FirefoxDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            baseURL = "http://localhost:8080";
+            baseURL = "http://localhost:8080/mantisbt-2.19.0";
             Registration = new RegistrationHelper(this);
             Ftp = new FtpHelper(this);
             James = new JamesHelper(this);
             Mail = new MailHelper(this);
+            Admin = new AdminHelper(this, baseURL);
 
-           
         }
 
          ~ApplicationManager()//деструктор, используется вместо  Stop для остановки потока; вызывается автоматически, поэтому не нужно писать модификатор видимости  к нему
@@ -55,7 +56,7 @@ namespace mantis_tests
             if (! app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost:8080/mantisbt-2.19.0/login_page.php";
+                newInstance.driver.Url = newInstance.baseURL + "/login_page.php";
                 
                 app.Value = newInstance;
                 
