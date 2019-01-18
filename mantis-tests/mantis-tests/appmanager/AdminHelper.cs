@@ -35,6 +35,7 @@ namespace mantis_tests
                 string href = link.GetAttribute("href");
                 Match m = Regex.Match(href, @"\d+$");
                 string id = m.Value;
+                //string email=row.FindElement(By.XPath("/td[3]")).Text;
                 accounts.Add(new AccountData()
                 {
                     Name = name,

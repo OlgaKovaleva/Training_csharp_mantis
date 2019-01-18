@@ -19,20 +19,22 @@ namespace mantis_tests
 
         public void Create(ProjectData project)
         {
-            IWebDriver driver = manager.Admin.LoginAsAdmin();
+            //manager.Login.LoginAsUser(account);
             manager.Navigate.OpenProjectsPage();
             InitiateProjectCreation();
             FillProjectForm(project);
             SubmitProjectCreation();
+            //manager.Navigate.OpenLogoutPage();
 
         }
 
         public List<ProjectData> GetAllProjects()
         {
-            IWebDriver driver = manager.Admin.LoginAsAdmin();
+            //manager.Login.LoginAsUser(account);
             manager.Navigate.OpenProjectsPage();
             List<ProjectData> projects = new List<ProjectData>();
-            IList<IWebElement> rows = driver.FindElements(By.XPath("//table[@class='table table-striped table-bordered table-condensed table-hover']/tbody/tr"));
+            IWebElement table = driver.FindElement(By.CssSelector(".widget-box"));
+            IList<IWebElement> rows = table.FindElements(By.CssSelector("table tbody tr"));
             foreach (IWebElement row in rows)
             {
                 IWebElement link = row.FindElement(By.TagName("a"));
@@ -47,7 +49,16 @@ namespace mantis_tests
                 });
 
             }
+            //manager.Navigate.OpenLogoutPage();
             return projects;
+        }
+
+        public void RemoveProject(ProjectData project)
+        {
+
+            manager.Navigate.OpenProjectEditPage(project);
+            driver.FindElement(By.CssSelector("input.btn.btn-primary.btn-sm.btn-white.btn-round")).Click();
+            driver.FindElement(By.CssSelector("input.btn.btn-primary.btn-white.btn-round")).Click();
         }
 
         public void SubmitProjectCreation()
@@ -67,7 +78,9 @@ namespace mantis_tests
 
         public void InitiateProjectCreation()
         {
-            driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+
+            driver.FindElement(By.CssSelector(".form-inline.inline.single-button-form")).Click();
+          
         }
     }
 }

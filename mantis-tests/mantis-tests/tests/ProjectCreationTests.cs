@@ -13,16 +13,33 @@ namespace mantis_tests
     [TestFixture]
     public class ProjectCreationTests:TestBase
     {
+        [TestFixtureSetUp]
+
+        public void Login()
+        {
+            AccountData account = new AccountData() { Name = "administrator", Password = "root" };
+            app.Login.LoginAsUser(account);
+
+        }
+
         [Test]
         public void TestProjectCreation()
         {
+            List<ProjectData> oldList = app.Project.GetAllProjects();
+
             ProjectData project = new ProjectData()
             {
-                Title = "Project title",
+                Title = "Project title15",
                 Description = "Lorem ipsum dolor sit amet orci aliquam."
             };
 
-            List<ProjectData> oldList = app.Project.GetAllProjects();
+            ProjectData projectWithSameTitle = oldList.Find(x => x.Title == project.Title);
+            if (projectWithSameTitle!=null)
+            {
+                app.Project.RemoveProject(projectWithSameTitle);
+            }
+
+            oldList = app.Project.GetAllProjects();
             app.Project.Create(project);
 
             List<ProjectData> newList = app.Project.GetAllProjects();
@@ -31,9 +48,16 @@ namespace mantis_tests
             oldList.Sort();
             newList.Sort();
 
-            Assert.AreEqual(oldList, newList);
-            Assert.AreEqual(oldList.Count, newList.Count);
            
+            Assert.AreEqual(oldList.Count, newList.Count);
+            Assert.AreEqual(oldList, newList);
+
+        }
+
+        [TestFixtureTearDown]
+        public void Logout()
+        {
+            app.Navigate.OpenLogoutPage();
         }
     }
 }

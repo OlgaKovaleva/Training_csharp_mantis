@@ -13,8 +13,17 @@ namespace mantis_tests
         [Test]
         public void TestMethod1()
         {
-            app.Admin.LoginAsAdmin();
-            app.Navigate.OpenUsersPage();
+
+            //ProjectData project = new ProjectData()
+            //{
+            //    Title = "Project title",
+            //    Description = "Lorem ipsum dolor sit amet orci aliquam."
+            //};
+            //AccountData account = new AccountData() { Name = "administrator", Password = "root" };
+            //app.Login.LoginAsUser(account);
+            //app.Navigate.OpenProjectsPage();
+            //app.Project.GetAllProjects();
+
         }
     }
 }

@@ -50,6 +50,7 @@ namespace mantis_tests
             Admin = new AdminHelper(this, baseURL);
             Login = new LoginHelper(this);
             Project = new ProjectHelper(this);
+            Navigate = new NavigationHelper(this, baseURL);
 
         }
 

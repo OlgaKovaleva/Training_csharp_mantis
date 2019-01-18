@@ -31,6 +31,7 @@ namespace mantis_tests
             driver.FindElement(By.XPath("//form[@id='login-form']/fieldset/input[3]")).Click();
             
         }
-        
+
+       
     }
 }

@@ -53,6 +53,20 @@ namespace mantis_tests
 
         }
 
+        public void OpenLogoutPage()
+        {
+            
+            driver.Navigate().GoToUrl(baseURL + "/logout_page.php");
+        }
+
+        public void OpenProjectEditPage(ProjectData project)
+        {
+            if (driver.Url == baseURL + "/manage_proj_edit_page.php?project_id=" + project.Id)
+            {
+                return;
+            }
+            driver.Navigate().GoToUrl(baseURL + "/manage_proj_edit_page.php?project_id=" + project.Id);
+        }
 
     }
 }
