@@ -24,6 +24,7 @@ namespace mantis_tests
         protected LoginHelper loginHelper;
         protected ProjectHelper projectHelper;
         protected NavigationHelper navigationHelper;
+        protected APIHelper aPIHelper;
 
         public RegistrationHelper Registration { get { return registrationHelper; } set { registrationHelper = value; } }
         public FtpHelper Ftp { get { return ftpHelper; } set { ftpHelper = value; } }
@@ -33,6 +34,7 @@ namespace mantis_tests
         public LoginHelper Login { get { return loginHelper; } set { loginHelper = value; } }
         public ProjectHelper Project { get { return projectHelper; } set { projectHelper = value; } }
         public NavigationHelper Navigate { get { return navigationHelper; } set { navigationHelper = value; } }
+        public APIHelper API { get { return aPIHelper; } set { aPIHelper = value; } }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>(); //специальный объект, который будет утсанавливать соответствие между текущим потоком и типом ApplicationManager
         
@@ -51,6 +53,7 @@ namespace mantis_tests
             Login = new LoginHelper(this);
             Project = new ProjectHelper(this);
             Navigate = new NavigationHelper(this, baseURL);
+            API =new APIHelper(this);
 
         }
 

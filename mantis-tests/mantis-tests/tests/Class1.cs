@@ -14,15 +14,14 @@ namespace mantis_tests
         public void TestMethod1()
         {
 
-            //ProjectData project = new ProjectData()
-            //{
-            //    Title = "Project title",
-            //    Description = "Lorem ipsum dolor sit amet orci aliquam."
-            //};
-            //AccountData account = new AccountData() { Name = "administrator", Password = "root" };
+
+            AccountData account = new AccountData() { Name = "administrator", Password = "root" };
             //app.Login.LoginAsUser(account);
             //app.Navigate.OpenProjectsPage();
-            //app.Project.GetAllProjects();
+
+            List<ProjectData> allProjects = new List<ProjectData>();
+            allProjects=app.API.GetAllProjects(account);
+            
 
         }
     }

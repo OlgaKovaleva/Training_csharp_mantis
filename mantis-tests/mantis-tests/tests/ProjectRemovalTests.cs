@@ -26,8 +26,10 @@ namespace mantis_tests
         {
 
             //preconditions
-            List<ProjectData> oldList = app.Project.GetAllProjects();
-            
+            AccountData account = new AccountData() { Name = "administrator", Password = "root" };
+            List<ProjectData> oldList = app.API.GetAllProjects(account);
+
+
             if (oldList.Count<1)
             {
                 ProjectData project = new ProjectData()
@@ -36,11 +38,12 @@ namespace mantis_tests
                     Description = "Lorem ipsum dolor sit amet orci aliquam."
                 };
 
-                app.Project.Create(project);
+                app.API.CreateProject(account, project);
 
             }
 
-            oldList = app.Project.GetAllProjects();
+            oldList = app.API.GetAllProjects(account);
+
             ProjectData projectToRemove = oldList[0];
 
             //actions
@@ -49,7 +52,8 @@ namespace mantis_tests
 
             //verification
 
-            List<ProjectData> newList = app.Project.GetAllProjects();
+            List<ProjectData> newList = app.API.GetAllProjects(account);
+
             oldList.Remove(projectToRemove);
 
             oldList.Sort();

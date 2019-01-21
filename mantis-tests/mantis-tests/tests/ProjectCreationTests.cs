@@ -25,7 +25,8 @@ namespace mantis_tests
         [Test]
         public void TestProjectCreation()
         {
-            List<ProjectData> oldList = app.Project.GetAllProjects();
+            AccountData account = new AccountData() { Name = "administrator", Password = "root" };
+            List<ProjectData> oldList = app.API.GetAllProjects(account);
 
             ProjectData project = new ProjectData()
             {
@@ -39,10 +40,12 @@ namespace mantis_tests
                 app.Project.RemoveProject(projectWithSameTitle);
             }
 
-            oldList = app.Project.GetAllProjects();
+            oldList = app.API.GetAllProjects(account);
+            
             app.Project.Create(project);
 
-            List<ProjectData> newList = app.Project.GetAllProjects();
+            List<ProjectData> newList = app.API.GetAllProjects(account);
+
             oldList.Add(project);
 
             oldList.Sort();
